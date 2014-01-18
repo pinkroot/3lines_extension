@@ -1,0 +1,25 @@
+#draw_area{
+	width: 450px;
+	text-align: center;
+}
+
+#title_area{
+	text-align: center;
+}
+
+.input_row{
+	width: 300px;
+}
+
+#post_row_list{
+	list-style: none;
+	padding-left: 0px;
+}
+
+img{
+	border: 0px;
+}
+
+#login_button{
+	margin: 20px;
+}

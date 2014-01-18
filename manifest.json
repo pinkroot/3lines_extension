@@ -1,0 +1,19 @@
+{
+	"name": "3lines",
+	"version": "0.1",
+	"manifest_version": 2,
+	"description": "3linesへ投稿するための拡張機能です.",
+	"permissions": [
+		"http://*/*",
+		"tabs"
+	],
+	"browser_action": {
+		"default_icon": "icon19.png",
+		"default_title": "3lines",
+		"default_popup": "pop_postform.html"
+	},
+	"icons": {
+		"48": "icon48.png",
+         "128": "icon128.png"
+    }
+}
