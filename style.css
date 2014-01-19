@@ -3,6 +3,11 @@
 	text-align: center;
 }
 
+#draw_error{
+	width: 450px;
+	text-align: center;
+}
+
 #title_area{
 	text-align: center;
 }

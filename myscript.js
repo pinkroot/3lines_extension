@@ -1,15 +1,15 @@
 isLogin = null;
 
-$(function(){
-	var req = new XMLHttpRequest();
+req = new XMLHttpRequest();
 
+$(function(){
 
 	req.open("GET", "http://3lines.info/api/islogin", true);
 
 	req.onreadystatechange = function(){
 
 		var isLoginJson = req.responseText;
-
+		/*
 		var isLoginJsonParse = JSON.parse(isLoginJson);
 		
 		isLogin = isLoginJsonParse.isLogin;
@@ -19,31 +19,52 @@ $(function(){
 			isLogin = isLoginJsonParse.isLogin;
 			req.onload = judgeLogin();
 		}
+		*/
 	
 	};
 
 	req.send(null);
-
-
+	
 
 	$("#submit_button").click(function(){
-		
+		console.log("submit button was clicked");
+
 		var data = {page_url: $('#page_url').val(), row1 : $('#row1').val(), row2 : $('#row2').val(), row3 : $('#row3').val()};
  		
-		req = new XMLHttpRequest();
+ 		if ((data['row1'].length == 0) || (data['row2'].length == 0) || (data['row3'].length == 0)){
+ 			var showText = "<div id='draw_error'><p>入力漏れがあります</p></div>";
+ 			$('#draw_error').replaceWith(showText);
+	
+ 		}
+ 		else {
+			console.log("submit");
 
+			req = new XMLHttpRequest();
 
-		req.onreadystatechange = function()
-		{
-		    var READYSTATE_COMPLETED = 4;
-		    var HTTP_STATUS_OK = 200;
+			req.onreadystatechange = function()
+			{
+				console.log("onready");
+			    var READYSTATE_COMPLETED = 4;
+			    var HTTP_STATUS_OK = 200;
 
-		    if( this.readyState == READYSTATE_COMPLETED
-		     && this.status == HTTP_STATUS_OK )
-		    {
-		        // レスポンスの表示
-		        alert('post!');
-		    }
+			    if( this.readyState == READYSTATE_COMPLETED && this.status == HTTP_STATUS_OK ){
+
+			    	if (this.status == HTTP_STATUS_OK){
+				        var showText = "<div id='draw_area'>";
+						showText = showText + "<p>投稿が完了しました</p>";
+						showText = showText + "<a href='http://3lines.info' target='_blank'>3linesを確認する</a></div>";
+
+						$("#draw_area").replaceWith(showText);
+					}
+					else {
+						var showText = "<div id='draw_error'><p>エラーが発生しました</p></div>";
+						
+						$("#draw_error").replaceWith(showText);
+						
+					}
+
+			    }
+			}
 		}
 
 		req.open( 'POST', 'http://3lines.info/add_matome' );
@@ -54,39 +75,12 @@ $(function(){
 		// データをリクエスト ボディに含めて送信する
 		req.send( EncodeHTMLForm( data ) );
 
-		/*
-		req.onreadystatechange = handleStateChange; // Implemented elsewhere.
-		req.open("post", chrome.extension.getURL('/config_resources/config.json'), true);
-		req.send();
-		*/
- 		/*
-		$.ajax({
-            type: "post",
-            url: "http://3lines.info/add_matome",
-            data: data,                
-            success: function(data, dataType)
-            {
-                alert("まとめを投稿しました！");
-                var showText = "<div id='draw_area'>";
-				showText = showText + "<p>投稿が完了しました</p>";
-				showText = showText + "<a href='http://3lines.info' target='_blank'>3linesを確認する</a></div>";
-
-				$("#draw_area").replaceWith(showText);
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown)
-            {
-                //エラーメッセージの表示
-                alert('Error : ');
-            }
-        });
-
-        //サブミット後、ページをリロードしないようにする
-        */
-		
+		return false;
 	});
 
 });
+
+
 
 
 function judgeLogin(){
@@ -118,6 +112,11 @@ function EncodeHTMLForm( data )
     }
 
     return params.join( '&' );
+}
+
+function getPageUrl(){
+	document.getElementById("page_url").value = location.href;
+	console.log(document.getElementById("page_url").value);
 }
 
 chrome.tabs.getSelected(function(tab){

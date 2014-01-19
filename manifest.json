@@ -1,10 +1,11 @@
 {
 	"name": "3lines",
-	"version": "0.1",
+	"version": "1.0",
 	"manifest_version": 2,
 	"description": "3linesへ投稿するための拡張機能です.",
 	"permissions": [
 		"http://*/*",
+		"https://*/*",
 		"tabs"
 	],
 	"browser_action": {
