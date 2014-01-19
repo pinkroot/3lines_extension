@@ -9,7 +9,7 @@ $(function(){
 	req.onreadystatechange = function(){
 
 		var isLoginJson = req.responseText;
-		/*
+		
 		var isLoginJsonParse = JSON.parse(isLoginJson);
 		
 		isLogin = isLoginJsonParse.isLogin;
@@ -19,7 +19,7 @@ $(function(){
 			isLogin = isLoginJsonParse.isLogin;
 			req.onload = judgeLogin();
 		}
-		*/
+		
 	
 	};
 
