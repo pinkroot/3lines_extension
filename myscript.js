@@ -39,6 +39,10 @@ $(function(){
  		else {
 			console.log("submit");
 
+			var showText = "<div id='draw_area'><p>投稿中です...</p></div>";
+			$("#draw_area").replaceWith(showText);
+			showText = "<div id='draw_error'></div>";
+			$("#draw_error").replaceWith(showText);
 			req = new XMLHttpRequest();
 
 			req.onreadystatechange = function()
